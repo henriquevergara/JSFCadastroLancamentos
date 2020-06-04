@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 
 import com.henrique.model.Lancamento;
 
 @ManagedBean
-@SessionScoped
+@ApplicationScoped
 public class ViewLancamentoBean implements Serializable{
 
 
@@ -43,6 +43,21 @@ public class ViewLancamentoBean implements Serializable{
 		
 	}
 	
+	public void cadastrar() {
+		 
+		this.lancamentos.add(lancamento);
+		lancamento = new Lancamento();
+	}
+	
+	public boolean mostrar(){
+		
+		if (this.lancamentos.isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
+		
+	}
 	
 
 	
