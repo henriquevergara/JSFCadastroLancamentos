@@ -7,11 +7,13 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Cadastro de Lancamento</title>
-	<h:outputStylesheet library="css" name="style.css"/>
+	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
 <h:body>
 
 	<h:form id="lancamento">
+
+		<h:messages showSummary="false" showDetail="true" />
 
 		<h:panelGrid columns="2">
 
@@ -20,23 +22,37 @@
 		</f:facet>
 
 			<h:outputLabel value="Pessoa:" />
-			<h:inputText size="50"
-				value="#{viewLancamentoBean.lancamento.pessoa}" />
+			<h:panelGroup>
+				<h:inputText size="50"
+					value="#{viewLancamentoBean.lancamento.pessoa}" />
+			</h:panelGroup>
+
 
 			<h:outputLabel value="Descrição:" />
-			<h:inputText size="50"
-				value="#{viewLancamentoBean.lancamento.descricao}" />
+			<h:panelGroup>
+				<h:inputText size="50"
+					value="#{viewLancamentoBean.lancamento.descricao}" />
+			</h:panelGroup>
+
 
 			<h:outputLabel value="Valor do pagamento:" />
-			<h:inputText size="25" value="#{viewLancamentoBean.lancamento.valor}" />
+			<h:panelGroup>
+				<h:inputText label="Valor do pagamento" id="valor" size="25"
+					value="#{viewLancamentoBean.lancamento.valor}">
+					<f:convertNumber minFractionDigits="2" locale="pt_BR" />
+				</h:inputText>
+				<h:message for="valor" showSummary="true" showDetail="false" />
+			</h:panelGroup>
 
 			<h:outputLabel value="Data de vencimento:" />
-			<h:inputText size="50"
-				value="#{viewLancamentoBean.lancamento.dataVencimento}" />
-
-			<h:outputLabel value="Data de pagamento:" />
-			<h:inputText size="50"
-				value="#{viewLancamentoBean.lancamento.dataPagamento}" />
+			<h:panelGroup>
+				<h:inputText label="Data de vencimento" id="dataLancamento"
+					size="50" value="#{viewLancamentoBean.lancamento.dataVencimento}">
+					<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+				</h:inputText>
+				<h:message for="dataLancamento" showSummary="true"
+					showDetail="false"></h:message>
+			</h:panelGroup>
 
 			<h:outputLabel value="Situação:" />
 			<h:selectOneMenu value="#{viewLancamentoBean.lancamento.situacao}">
@@ -53,57 +69,60 @@
 
 
 
+		<br />
+		<br />
+		<br />
+		<br />
 
-	</h:form>
-
-
-		
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<h:outputLabel value="Tabela de Controle" id="labelH1" rendered="#{not empty viewLancamentoBean.lancamentos}"/>
+		<h:outputLabel value="Tabela de Controle" id="labelH1"
+			rendered="#{not empty viewLancamentoBean.lancamentos}" />
 		<h:dataTable value="#{viewLancamentoBean.lancamentos}"
 			var="lancamento" id="lancaTabela"
-			rendered="#{not empty viewLancamentoBean.lancamentos}" styleClass="order-table"
-    			headerClass="order-table-header"
-    			rowClasses="order-table-odd-row,order-table-even-row">
+			rendered="#{not empty viewLancamentoBean.lancamentos}"
+			styleClass="order-table" headerClass="order-table-header"
+			rowClasses="order-table-odd-row,order-table-even-row">
 
 			<h:column>
 				<f:facet name="header">Pessoa</f:facet>
     			#{lancamento.pessoa}
     	    </h:column>
-    	    
-    	    <h:column>
+
+			<h:column>
 				<f:facet name="header">Descrição</f:facet>
     			#{lancamento.descricao}
     	    </h:column>
-    	    
-    	     <h:column>
+
+			<h:column>
 				<f:facet name="header">Valor:</f:facet>
-    			#{lancamento.valor}
-    	    </h:column>
-			
-			 <h:column>
+				<h:outputText value="#{lancamento.valor}">
+					<f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR" />
+				</h:outputText>
+			</h:column>
+
+			<h:column>
 				<f:facet name="header">Data Vencimento:</f:facet>
-    			#{lancamento.dataVencimento}
-    	    </h:column>
-    	    
-    	     <h:column>
-				<f:facet name="header">Data Pagamento:</f:facet>
-    			#{lancamento.dataPagamento}
-    	    </h:column>
-    	    
-    	    <h:column>
+				<h:outputText value="#{lancamento.dataVencimento}">
+					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+				</h:outputText>
+			</h:column>
+
+			<h:column>
 				<f:facet name="header">Situação:</f:facet>
     			#{lancamento.situacao}
     	    </h:column>
-    	    
-    	    
-			
 
+			<h:column>
+				<f:facet name="header">Excluir:</f:facet>
+				<h:commandButton value="Excluir"
+					action="#{viewLancamentoBean.excluir}">
+					<f:setPropertyActionListener value="#{lancamento}"
+						target="#{viewLancamentoBean.lancamentoSelecionado}" />
+				</h:commandButton>
+			</h:column>
 		</h:dataTable>
 
+
+	</h:form>
 
 </h:body>
 </html>

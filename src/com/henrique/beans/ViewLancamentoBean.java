@@ -19,6 +19,7 @@ public class ViewLancamentoBean implements Serializable{
 	
 	private List<Lancamento> lancamentos;
 	private Lancamento lancamento;
+	private Lancamento lancamentoSelecionado;
 	
 	public List<Lancamento> getLancamentos() {
 		return lancamentos;
@@ -57,6 +58,20 @@ public class ViewLancamentoBean implements Serializable{
 			return true;
 		}
 		
+	}
+	
+	public void excluir() {
+		
+		this.lancamentos.remove(this.lancamentoSelecionado);
+		
+	}
+
+	public Lancamento getLancamentoSelecionado() {
+		return lancamentoSelecionado;
+	}
+
+	public void setLancamentoSelecionado(Lancamento lancamentoSelecionado) {
+		this.lancamentoSelecionado = lancamentoSelecionado;
 	}
 	
 

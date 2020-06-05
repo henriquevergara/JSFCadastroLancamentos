@@ -1,12 +1,14 @@
 package com.henrique.model;
 
+import java.util.Date;
+
 public class Lancamento {
 
 	private String pessoa;
 	private String descricao;
 	private Double valor;
-	private String dataVencimento;
-	private String dataPagamento;
+	private Date dataVencimento;
+	private Date dataPagamento;
 	private boolean situacao;
 	
 	public String getPessoa() {
@@ -27,16 +29,17 @@ public class Lancamento {
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
-	public String getDataVencimento() {
+
+	public Date getDataVencimento() {
 		return dataVencimento;
 	}
-	public void setDataVencimento(String dataVencimento) {
+	public void setDataVencimento(Date dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
-	public String getDataPagamento() {
+	public Date getDataPagamento() {
 		return dataPagamento;
 	}
-	public void setDataPagamento(String dataPagamento) {
+	public void setDataPagamento(Date dataPagamento) {
 		this.dataPagamento = dataPagamento;
 	}
 	public boolean isSituacao() {
