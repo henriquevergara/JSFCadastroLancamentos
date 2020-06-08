@@ -74,6 +74,9 @@ public class ViewLancamentoBean implements Serializable{
 		this.lancamentoSelecionado = lancamentoSelecionado;
 	}
 	
+	public void limpar() {
+		this.lancamentos.clear();
+	}
 
 	
 }

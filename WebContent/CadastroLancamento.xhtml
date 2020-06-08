@@ -38,7 +38,7 @@
 			<h:outputLabel value="Valor do pagamento:" />
 			<h:panelGroup>
 				<h:inputText label="Valor do pagamento" id="valor" size="25"
-					value="#{viewLancamentoBean.lancamento.valor}">
+					value="#{viewLancamentoBean.lancamento.valor}" required="true">
 					<f:convertNumber minFractionDigits="2" locale="pt_BR" />
 				</h:inputText>
 				<h:message for="valor" showSummary="true" showDetail="false" />
@@ -64,6 +64,8 @@
 
 			<h:commandButton value="Cadastrar"
 				action="#{viewLancamentoBean.cadastrar}" />
+			<h:commandButton value="Limpar"
+				action="#{viewLancamentoBean.limpar}" immediate="true" />
 
 		</h:panelGrid>
 
